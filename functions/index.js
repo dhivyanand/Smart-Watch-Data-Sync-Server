@@ -5,13 +5,20 @@ admin.initializeApp(functions.config().firebase);
 
 var db = admin.firestore();
 
- exports.test_add = functions.https.onRequest((request, response) => {
-  
-    var docRef = db.collection('admin').doc('a');
+var collections = db.collection('admin').doc('smartWatch');
 
-    var setAda = docRef.set({
-        req: "hello world"
+ exports.registration = functions.https.onRequest((request, response) => {
+  
+    var uname = request.body.uname;
+    var password = request.body.password;
+    var email = request.body.email;
+
+    var user_reg = collections.collection('User').doc(email).set({
+        password: password,
+        name: uname,
+        otp: ""
     });
 
-    response.send("Added \"Hello World\" as a data to firestore");
+    
+    response.send("User Created");
  });
