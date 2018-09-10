@@ -3,9 +3,7 @@ const admin = require('firebase-admin');
 
 admin.initializeApp(functions.config().firebase);
 
-var db = admin.firestore();
-
-var collections = db.collection('admin').doc('smartWatch');
+var db = admin.database();
 
  exports.registration = functions.https.onRequest((request, response) => {
   
@@ -25,6 +23,8 @@ var collections = db.collection('admin').doc('smartWatch');
  exports.testFunc = functions.https.onRequest((request, response) => {
 
 
+  var ref = db.ref("Sample");
+  ref.set({test:"okay"});
   response.send('Functions working');
 
 
