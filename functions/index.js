@@ -5,11 +5,28 @@ admin.initializeApp(functions.config().firebase);
 
 var db = admin.database();
 
+var ref = db.ref("Smart Watch/User");
+
+function check_entry(entry){
+
+    ref.once('value', function(snapshot) {
+        if (snapshot.hasChild(entry)) {
+          
+        }else{
+            
+        }
+        
+    });
+
+}
+
  exports.registration = functions.https.onRequest((request, response) => {
   
     var uname = request.body.uname;
     var password = request.body.password;
     var email = request.body.email;
+
+    
 
  });
 
@@ -23,9 +40,11 @@ var db = admin.database();
  exports.testFunc = functions.https.onRequest((request, response) => {
 
 
-  var ref = db.ref("Sample");
-  ref.set({test:"okay"});
-  response.send('Functions working');
-
+    ref.once('value', function(snapshot) {
+        if (snapshot.hasChild('email')) {
+          response.send('hello')
+        }else
+        response.send('sry')
+      });
 
  });
