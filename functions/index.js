@@ -9,14 +9,20 @@ var ref = db.ref("Smart Watch/User");
 
 function check_entry(entry){
 
-    ref.once('value', function(snapshot) {
-        if (snapshot.hasChild(entry)) {
-          
+    if(ref.once('value', function(snapshot) {
+       
+        if (snapshot.hasChild('email')) {
+          return true;
         }else{
-            
+          return false;  
         }
         
-    });
+    })){
+     
+        return true
+    
+    }else
+        return false
 
 }
 
@@ -40,11 +46,9 @@ function check_entry(entry){
  exports.testFunc = functions.https.onRequest((request, response) => {
 
 
-    ref.once('value', function(snapshot) {
-        if (snapshot.hasChild('email')) {
-          response.send('hello')
-        }else
-        response.send('sry')
-      });
+    if(check_entry('email'))
+     response.send('true');
+    else 
+     response.send('false'); 
 
  });
