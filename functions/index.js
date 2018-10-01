@@ -38,9 +38,9 @@ function check_entry(entry){
           response.send('#already available')
         }else{
 
-          var req = '{'+emails+':{healthInfo:{calories_burned:10},profile:{name:'+uname+',password:'+password+'}}}'
+          //var req = '{emails:{healthInfo:{calories_burned:10},profile:{name:'+uname+',password:'+password+'}}}'
           
-          var a = {emails:{
+          var a = {[emails]:{
             "healthInfo":{
                 "calories_burned":"10"
                 },
