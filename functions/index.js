@@ -30,11 +30,44 @@ function check_entry(entry){
   
     var uname = request.body.uname;
     var password = request.body.password;
-    var email = request.body.email;
+    var emails = request.body.email;
 
-    
+    ref.once('value', function(snapshot) {
+       
+        if (snapshot.hasChild(emails)) {
+          response.send('#already available')
+        }else{
 
- });
+          var req = '{'+emails+':{healthInfo:{calories_burned:10},profile:{name:'+uname+',password:'+password+'}}}'
+          
+          var a = {emails:{
+            "healthInfo":{
+                "calories_burned":"10"
+                },
+            "profile":{
+                "name":uname,
+                "password":password
+                }
+          }}
+
+         /* ref.update({emails:{
+                            "healthInfo":{
+                                "calories_burned":"10"
+                                },
+                            "profile":{
+                                "name":uname,
+                                "password":password
+                                }
+                         }
+                     })   */
+          ref.update(a)
+          response.send('#savng') 
+        }
+        
+    })
+
+
+});
 
  exports.login = functions.https.onRequest((request, response) => {
 
@@ -44,11 +77,6 @@ function check_entry(entry){
  });
 
  exports.testFunc = functions.https.onRequest((request, response) => {
-
-
-    if(check_entry('email'))
-     response.send('true');
-    else 
-     response.send('false'); 
+      
 
  });
