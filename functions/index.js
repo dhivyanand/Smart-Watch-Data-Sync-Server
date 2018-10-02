@@ -59,7 +59,7 @@ var ref = db.ref("Smart Watch/User");
                     response.send('#enter_otp')
 
                 }else if (data.val() == password.toString()) {
-                    
+                    response.send('#successful_login')
                 }else{
                                    
                         if(flag.val() == "Ze"){
