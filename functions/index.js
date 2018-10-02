@@ -25,7 +25,8 @@ var ref = db.ref("Smart Watch/User");
                                 },
                             "profile":{
                                 "name":uname,
-                                "password":password
+                                "password":password,
+                                "flag":"zero"
                                 }
                          }
                      })   
