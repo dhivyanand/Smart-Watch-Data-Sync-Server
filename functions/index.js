@@ -7,25 +7,6 @@ var db = admin.database();
 
 var ref = db.ref("Smart Watch/User");
 
-function check_entry(entry){
-
-    if(ref.once('value', function(snapshot) {
-       
-        if (snapshot.hasChild('email')) {
-          return true;
-        }else{
-          return false;  
-        }
-        
-    })){
-     
-        return true
-    
-    }else
-        return false
-
-}
-
  exports.registration = functions.https.onRequest((request, response) => {
   
     var uname = request.body.uname;
@@ -37,20 +18,8 @@ function check_entry(entry){
         if (snapshot.hasChild(emails)) {
           response.send('#already available')
         }else{
-
-          //var req = '{emails:{healthInfo:{calories_burned:10},profile:{name:'+uname+',password:'+password+'}}}'
-          
-          var a = {[emails]:{
-            "healthInfo":{
-                "calories_burned":"10"
-                },
-            "profile":{
-                "name":uname,
-                "password":password
-                }
-          }}
-
-         /* ref.update({emails:{
+              
+          ref.update({[emails]:{
                             "healthInfo":{
                                 "calories_burned":"10"
                                 },
@@ -59,8 +28,7 @@ function check_entry(entry){
                                 "password":password
                                 }
                          }
-                     })   */
-          ref.update(a)
+                     })   
           response.send('#savng') 
         }
         
