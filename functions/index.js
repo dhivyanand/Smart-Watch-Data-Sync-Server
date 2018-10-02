@@ -8,6 +8,10 @@ var db = admin.database();
 
 var ref = db.ref("Smart Watch/User");
 
+function go_mail(id,otp){
+
+}
+
 function gen_OTP(id){
 
     g = ref.child(id+'/profile/')
