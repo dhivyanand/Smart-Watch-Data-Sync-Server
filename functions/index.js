@@ -16,6 +16,10 @@ function gen_OTP(id){
 
 }
 
+exports.getOTP = functions.https.onRequest((request, response) => {
+
+});
+
  exports.registration = functions.https.onRequest((request, response) => {
   
     var uname = request.body.uname;
