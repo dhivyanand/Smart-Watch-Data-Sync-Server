@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "firebase-admin": "~5.12.1",
-    "firebase-functions": "^1.0.3"
+    "firebase-functions": "^1.0.3",
+    "nodemailer": "^4.6.8"
   },
   "private": true
 }
