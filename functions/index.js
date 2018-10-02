@@ -48,13 +48,37 @@ var ref = db.ref("Smart Watch/User");
           
             r = ref.child(id.toString()+'/profile/password')
 
+            f0 = ref.child(id+'/profile')
+            f = f0.child('flag')
+            
             r.once('value', function(data) {
-                if (data.val() == password.toString()) {
+                f.once('value', function(flag) {
+
+                if(flag.val() == "Th"){
+
+                    response.send('#enter_otp')
+
+                }else if (data.val() == password.toString()) {
                     
                 }else{
-                    response.send('#incorrect_password')
+                                   
+                        if(flag.val() == "Ze"){
+                            f0.update({flag:"On"})
+                            response.send('#incorrect_password')
+                        }
+                        else if(flag.val() == "On"){
+                            f0.update({flag:"Tw"})
+                            response.send('#incorrect_password')
+                        }
+                        else if(flag.val() == "Tw"){
+                            f0.update({flag:"Th"})
+                            response.send('#enter_otp')
+                        } 
 
-                }
+                    
+                    }
+                })
+
               });
 
         }else{
@@ -66,9 +90,9 @@ var ref = db.ref("Smart Watch/User");
 
  exports.testFunc = functions.https.onRequest((request, response) => {
 
-    r = ref.child('abcd/profile/password')
+    r = ref.child('abcd/profile')
 
-    r.set({abc})
+    r.update({password:"abcd"})
 
 
  });
