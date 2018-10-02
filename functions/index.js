@@ -18,6 +18,21 @@ function gen_OTP(id){
 
 exports.getOTP = functions.https.onRequest((request, response) => {
 
+    var id = request.body.id;
+    var otp = request.body.otp;
+
+    o = ref.child(id+'/profile/otp')
+
+    o.once('value',function(data){
+
+        if(data.val() == otp.toString()){
+            response.send('#successful_validation')
+        }else{
+            response.send('#wrong_otp')
+        }
+
+    })
+
 });
 
  exports.registration = functions.https.onRequest((request, response) => {
