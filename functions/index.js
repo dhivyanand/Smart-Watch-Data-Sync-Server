@@ -42,10 +42,33 @@ var ref = db.ref("Smart Watch/User");
 
     var id = request.body.id;
     var password = request.body.password;
+
+    ref.once('value', function(snapshot) {
+        if (snapshot.hasChild(id)) {
+          
+            r = ref.child(id.toString()+'/profile/password')
+
+            r.once('value', function(data) {
+                if (data.val() == password.toString()) {
+                    
+                }else{
+                    response.send('#incorrect_password')
+
+                }
+              });
+
+        }else{
+            response.send('#no_exist')
+        }
+      });
  
  });
 
  exports.testFunc = functions.https.onRequest((request, response) => {
-      
+
+    r = ref.child('abcd/profile/password')
+
+    r.set({abc})
+
 
  });
